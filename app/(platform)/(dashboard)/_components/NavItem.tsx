@@ -12,6 +12,7 @@ import Image from "next/image";
 import React from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export type Organization = {
   id: string;
@@ -27,7 +28,7 @@ interface NavItemProps {
   onExpand: (id: string) => void;
 }
 
-const NavItem = ({
+export const NavItem = ({
   isExpanded,
   isActive,
   organization,
@@ -105,4 +106,13 @@ const NavItem = ({
   );
 };
 
-export default NavItem;
+NavItem.Skeleton = function SkeletonNavItem() {
+  return (
+    <div className="flex items-center gap-x-2">
+      <div className="w-10 h-10 relative shrink-0">
+        <Skeleton className="h-full w-full absolute" />
+      </div>
+      <Skeleton className="h-10 w-full" />
+    </div>
+  );
+};
